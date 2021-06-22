@@ -1,0 +1,2 @@
+[vue]
+vue1 ansible_host=18.157.168.137

@@ -1,0 +1,46 @@
+---
+- name: Configure VueServer
+  hosts: vue
+  become: yes
+
+  vars_files:
+  - vars.yml
+
+  tasks:
+  - name: Update yum rep
+    yum: 
+        name: "*"
+        state: latest
+  
+  - name: Install Nginx
+    command: amazon-linux-extras install -y nginx1
+  
+  - name: Set autorun for Nginx
+    service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  - name: Nginx configuring
+    template:
+        src: files/site.conf
+        dest: /etc/nginx/conf.d/site.conf
+      
+  - name: Change user in nginx.conf
+    lineinfile: 
+        path: /etc/nginx/nginx.conf 
+        regexp: '^(.*)user nginx;(.*)$' 
+        line: 'user {{username}};'
+        backrefs: yes
+
+  - name: Restart Nginx
+    service:
+        name: nginx
+        state: restarted
+
+  - name: Copying site files
+    copy:
+        src: "{{ site_src }}"
+        dest: "{{ site_root_dir }}"
+        owner: "{{username}}"
+        group: "{{username}}"

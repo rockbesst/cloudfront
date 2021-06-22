@@ -6,7 +6,7 @@ provider "aws" {
 data "aws_vpc" "mainVPC" {}
 
 locals {
-    origin_id = "TestOrigin"
+    origin_id = "WebServerOrigin"
 }
 
 resource "aws_cloudfront_distribution" "main_dist" {
@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "main_dist" {
         origin_id = local.origin_id
     }
     default_cache_behavior {
-        allowed_methods = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+        allowed_methods = ["GET", "HEAD"]
         cached_methods = ["GET", "HEAD"]
         target_origin_id = local.origin_id
         viewer_protocol_policy = "allow_all"

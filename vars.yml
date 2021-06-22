@@ -1,0 +1,6 @@
+---
+
+site_src: ./files/site/
+site_root_dir: /home/{{username}}/site/
+server_name: test.site
+username: ec2-user
