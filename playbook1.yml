@@ -23,16 +23,9 @@
 
   - name: Nginx configuring
     template:
-        src: files/site.conf
-        dest: /etc/nginx/conf.d/site.conf
+        src: files/nginx.conf
+        dest: /etc/nginx/nginx.conf
       
-  - name: Change user in nginx.conf
-    lineinfile: 
-        path: /etc/nginx/nginx.conf 
-        regexp: '^(.*)user nginx;(.*)$' 
-        line: 'user {{username}};'
-        backrefs: yes
-
   - name: Restart Nginx
     service:
         name: nginx
