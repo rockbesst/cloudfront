@@ -21,6 +21,9 @@ resource "aws_cloudfront_distribution" "main_dist" {
         viewer_protocol_policy = "allow_all"
         forwarded_values{
             query_string = false
+            cookies {
+                forward = "none"
+            }
         }
     }
     enabled = true
