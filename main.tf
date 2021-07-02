@@ -25,8 +25,10 @@ resource "aws_cloudfront_distribution" "main_dist" {
     }
     enabled = true
     restrictions {
-        restriction_type = "whitelist"
-        locations = ["UA", "PL"]
+        geo_restriction {
+            restriction_type = "whitelist"
+            locations = ["UA", "PL"]
+        }
     }
     viewer_certificate {
         cloudfront_default_certificate = true
