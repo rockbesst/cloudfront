@@ -18,7 +18,7 @@ resource "aws_cloudfront_distribution" "main_dist" {
         allowed_methods = ["GET", "HEAD"]
         cached_methods = ["GET", "HEAD"]
         target_origin_id = local.origin_id
-        viewer_protocol_policy = "allow_all"
+        viewer_protocol_policy = "allow-all"
         forwarded_values{
             query_string = false
             cookies {
