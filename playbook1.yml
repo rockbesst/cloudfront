@@ -1,6 +1,6 @@
 ---
 - name: Configure VueServer
-  hosts: vue
+  hosts: web
   become: yes
 
   vars_files:
